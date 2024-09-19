@@ -33,10 +33,10 @@
                                     data-id="{{ $item->id }}" data-nama="{{ $item->nama }}">
                                     <i class="ti ti-edit"></i> Update
                                     </a>
-                                    <button class="btn btn-outline-danger" data-confirm-delete="true"
+                                    <a class="btn btn-outline-danger" data-confirm-delete="true"
                                         href="{{ route('kota.delete', $item->id) }}">
                                         <i class="ti ti-trash"></i> Hapus
-                                    </button>
+                                    </a>
                                 </center>
                             </td>
                         </tr>

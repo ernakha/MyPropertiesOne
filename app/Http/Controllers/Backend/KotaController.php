@@ -12,6 +12,9 @@ class KotaController extends Controller
     public function index()
     {
         $kota = Kota::all();
+        $title = 'Delete Route Data!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
         return view('Backend.kota.index', compact('kota'));
     }
 
@@ -24,6 +27,7 @@ class KotaController extends Controller
 
         // Cek apakah validasi gagal
         if ($validator->fails()) {
+            toast('Validation failed! Please check your input.', 'error');
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
@@ -32,6 +36,7 @@ class KotaController extends Controller
         $dataKota = new Kota();
         $dataKota->nama = $request->nama;
         $dataKota->save();
+        toast('Your data as been submited!', 'success');
         return redirect()->route('kota.view');
     }
 
@@ -42,6 +47,7 @@ class KotaController extends Controller
         $dataKota = Kota::find($id);          // Mencari id dari data yang di pilih
         $dataKota->nama = $request->nama;
         $dataKota->update();
+        toast('Your data as been edited!', 'success');
         return redirect()->route('kota.view');
     }
 
@@ -49,6 +55,7 @@ class KotaController extends Controller
     {
         $kotaDelete = Kota::find($id);
         $kotaDelete->delete();
+        toast('Your data as been deleted!', 'success');
         return redirect()->route('kota.view');
     }
 }
