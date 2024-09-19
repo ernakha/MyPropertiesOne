@@ -24,6 +24,32 @@
       @yield('admin')
     </div>
   </div>
+
+          <!-- Logout Modal-->
+          <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Apakah Anda Yakin Ingin Keluar?</h5>
+                      <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="background: none; border: none; font-size: 1.5rem;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                  <div class="modal-body">Pilih Tombol "Keluar" Untuk Keluar Dari Halaman Ini</div>
+                  <div class="modal-footer">
+                      <button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">Batal</button>
+                      <a class="btn btn-primary" href="{{ route('logout') }}"
+                          onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
+                          <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+                              {{ csrf_field() }}
+                          </form>
+                          <span>Keluar</span>
+                      </a>
+                  </div>
+              </div>
+          </div>
+      </div>
   <script src="{{asset('assets/libs/jquery/dist/jquery.min.js')}}"></script>
   <script src="{{asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
   <script src="{{asset('assets/js/sidebarmenu.js')}}"></script>
