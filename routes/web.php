@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\KotaController;
 use App\Http\Controllers\Backend\SertifikatController;
+use App\Http\Controllers\PropertiController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -37,12 +38,16 @@ Route::middleware([
         Route::get('/kota', [KotaController::class, 'index'])->name('kota.view');
         Route::post('/kota/store', [KotaController::class, 'store'])->name('kota.store');
         Route::post('/kota/update/{id}', [KotaController::class, 'update'])->name('kota.update');
-        Route::delete('/kota/delete/{id}', [KotaController::class, 'delete'])->name('kota.delete');
+        Route::get('/kota/delete/{id}', [KotaController::class, 'delete'])->name('kota.delete');
 
         // Sertifikat
         Route::get('/sertifikat', [SertifikatController::class, 'index'])->name('sertifikat.view');
         Route::post('/sertifikat/store', [SertifikatController::class, 'store'])->name('sertifikat.store');
         Route::post('/sertifikat/update/{id}', [SertifikatController::class, 'update'])->name('sertifikat.update');
-        Route::delete('/sertifikat/delete/{id}', [SertifikatController::class, 'delete'])->name('sertifikat.delete');
+        Route::get('/sertifikat/delete/{id}', [SertifikatController::class, 'delete'])->name('sertifikat.delete');
+        
+        // Properti
+        Route::get('/properti',  [PropertiController::class, 'index'])->name('properti.view');
+        Route::get('/properti/add',  [PropertiController::class, 'add'])->name('properti.add');
     });
 });

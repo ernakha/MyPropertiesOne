@@ -12,9 +12,6 @@ class KotaController extends Controller
     public function index()
     {
         $kota = Kota::all();
-        $title = 'Delete Route Data!';
-        $text = "Are you sure you want to delete?";
-        confirmDelete($title, $text);
         return view('Backend.kota.index', compact('kota'));
     }
 
