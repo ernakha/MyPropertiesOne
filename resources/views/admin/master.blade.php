@@ -33,6 +33,9 @@
   <script src="{{asset('assets/js/dashboard.js')}}"></script>
   {{-- detail modal --}}
   @yield('script')
+
+  {{-- sweetalert --}}
+  @include('sweetalert::alert')
 </body>
 
 </html>
