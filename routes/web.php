@@ -56,7 +56,8 @@ Route::middleware([
         Route::get('/properti/delete/{$id}', [PropertiController::class, 'delete'])->name('properti.delete');
         Route::get('/properti/view/{id}',  function($id){
             $props = Properti::find($id);
-            return view('backend.properti.view', compact('props'));
+            $gambar = json_decode($props->gambar);
+            return view('backend.properti.view', compact('props', 'gambar'));
         })->name('properti.edit');
     });
 });
