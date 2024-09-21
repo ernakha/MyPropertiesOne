@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('km');
             $table->string('garasi');
             $table->text('deskripsi');
-            $table->string('gambar');
+            $table->text('gambar');
             $table->timestamps();
         });
     }

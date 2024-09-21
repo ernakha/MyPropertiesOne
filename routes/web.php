@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\KotaController;
 use App\Http\Controllers\Backend\SertifikatController;
 use App\Http\Controllers\PropertiController;
+use App\Models\Properti;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -49,5 +50,13 @@ Route::middleware([
         // Properti
         Route::get('/properti',  [PropertiController::class, 'index'])->name('properti.view');
         Route::get('/properti/add',  [PropertiController::class, 'add'])->name('properti.add');
+        Route::post('/properti/store', [PropertiController::class, 'store'])->name('properti.store');
+        Route::get('/properti/edit/{id}',  [PropertiController::class, 'edit'])->name('properti.edit');
+        Route::post('/properti/update/{id}', [PropertiController::class, 'update'])->name('properti.update');
+        Route::get('/properti/delete/{$id}', [PropertiController::class, 'delete'])->name('properti.delete');
+        Route::get('/properti/view/{id}',  function($id){
+            $props = Properti::find($id);
+            return view('backend.properti.view', compact('props'));
+        })->name('properti.edit');
     });
 });
