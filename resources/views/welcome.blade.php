@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EduHome - Education Is About Academic Excellence</title>
+  <title>MyPropertiesOne - Properties Seller Number One</title>
 
   <!-- 
     - favicon
@@ -91,7 +91,7 @@
 
       <h1>
         <a href="#" class="logo">
-          <img src="{{ asset('frontend/assets/images/logo-brand2.png') }}" alt="EduHome Logo" class="logo-img">
+          <img src="{{ asset('frontend/assets/images/logo-brand3.png') }}" alt="MyPropertiesOne Logo" class="logo-img">
         </a>
       </h1>
 
@@ -113,23 +113,15 @@
           </li>
 
           <li class="navbar-item">
-            <a href="#about" class="navbar-link" data-nav-toggler>About</a>
+            <a href="#kota" class="navbar-link" data-nav-toggler>Kota</a>
           </li>
 
           <li class="navbar-item">
-            <a href="#courses" class="navbar-link" data-nav-toggler>Courses</a>
+            <a href="#properti" class="navbar-link" data-nav-toggler>Properti</a>
           </li>
 
           <li class="navbar-item">
-            <a href="#event" class="navbar-link" data-nav-toggler>Event</a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="#" class="navbar-link" data-nav-toggler>Blog</a>
-          </li>
-
-          <li class="navbar-item">
-            <a href="#" class="navbar-link" data-nav-toggler>Contact</a>
+            <a href="#footer" class="navbar-link" data-nav-toggler>Kontak</a>
           </li>
 
         </ul>
@@ -154,10 +146,6 @@
     </div>
   </header>
 
-
-
-
-
   <!-- 
     - #SEARCH BOX
   -->
@@ -181,9 +169,6 @@
   </div>
 
 
-
-
-
   <main>
     <article>
 
@@ -196,16 +181,16 @@
 
           <div class="hero-content">
 
-            <p class="section-subtitle">Better Learning Future With Us</p>
+            <p class="section-subtitle">penjual properti nomor satu</p>
 
-            <h2 class="h1 hero-title">Education Is About Academic Excellence</h2>
+            <h2 class="h1 hero-title">MyPropertiesOne</h2>
 
             <p class="hero-text">
-              Sed eu volutpat arcu, a tincidunt nulla quam, feugiat sit amet ipsum a, dapibus porta velit.
+              Temukan Rumah yang Sesuai Gaya Hidup Anda. Jelajahi ribuan pilihan properti yang disesuaikan dengan kebutuhan Anda.
             </p>
 
-            <a href="#" class="btn btn-primary">
-              <span class="span">Get Started Today</span>
+            <a href="#properti" class="btn btn-primary">
+              <span class="span">Cari Properti</span>
 
               <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
             </a>
@@ -214,13 +199,13 @@
 
           <figure class="hero-banner">
 
-            <img src="{{asset('frontend/assets/images/hero-banner.png')}}" width="500" height="500" loading="lazy" alt="hero image"
+            <img src="{{asset('frontend/assets/images/hero-banner1.png')}}" width="500" height="500" loading="lazy" alt="hero image"
               class="w-100">
 
-            <img src="{{asset('frontend/assets/images/hero-abs-1.png')}}" width="318" height="352" loading="lazy" aria-hidden="true"
+            <img src="{{asset('frontend/assets/images/hero-abs-01.png')}}" width="318" height="352" loading="lazy" aria-hidden="true"
               class="abs-img abs-img-1">
 
-            <img src="{{asset('frontend/assets/images/hero-abs-2.png')}}" width="160" height="160" loading="lazy" aria-hidden="true"
+            <img src="{{asset('frontend/assets/images/hero-abs-02.png')}}" width="160" height="160" loading="lazy" aria-hidden="true"
               class="abs-img abs-img-2">
 
           </figure>
@@ -228,205 +213,48 @@
         </div>
       </section>
 
-
-
-
-
       <!-- 
         - #CATEGORY
       -->
 
-      <section class="section category" aria-label="category">
+      <section class="section category" id="kota" aria-label="category">
         <div class="container">
 
-          <p class="section-subtitle">Course Categories</p>
+          <p class="section-subtitle">Kota-kota</p>
 
-          <h2 class="h2 section-title">Popular Topics To Learn</h2>
+          <h2 class="h2 section-title">Di Indonesia</h2>
 
           <ul class="grid-list">
-
+            @foreach ($kota as $item)
             <li>
               <div class="category-card">
 
                 <div class="card-icon">
-                  <ion-icon name="briefcase-outline"></ion-icon>
+                  <ion-icon name="business-outline"></ion-icon>
                 </div>
 
                 <div>
                   <h3 class="h3 card-title">
-                    <a href="#">Personal Development</a>
+                    <a href="#">{{$item->nama}}</a>
                   </h3>
 
-                  <span class="card-meta">39 Course</span>
+                  <span class="card-meta">{{$item->properti_count}} Properti</span>
                 </div>
 
               </div>
             </li>
-
-            <li>
-              <div class="category-card">
-
-                <div class="card-icon">
-                  <ion-icon name="file-tray-full-outline"></ion-icon>
-                </div>
-
-                <div>
-                  <h3 class="h3 card-title">
-                    <a href="#">Human Research</a>
-                  </h3>
-
-                  <span class="card-meta">24 Course</span>
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="category-card">
-
-                <div class="card-icon">
-                  <ion-icon name="color-palette-outline"></ion-icon>
-                </div>
-
-                <div>
-                  <h3 class="h3 card-title">
-                    <a href="#">Art & Design</a>
-                  </h3>
-
-                  <span class="card-meta">39 Course</span>
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="category-card">
-
-                <div class="card-icon">
-                  <ion-icon name="layers-outline"></ion-icon>
-                </div>
-
-                <div>
-                  <h3 class="h3 card-title">
-                    <a href="#">Business Management</a>
-                  </h3>
-
-                  <span class="card-meta">39 Course</span>
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="category-card">
-
-                <div class="card-icon">
-                  <ion-icon name="laptop-outline"></ion-icon>
-                </div>
-
-                <div>
-                  <h3 class="h3 card-title">
-                    <a href="#">Web Development</a>
-                  </h3>
-
-                  <span class="card-meta">39 Course</span>
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="category-card">
-
-                <div class="card-icon">
-                  <ion-icon name="thumbs-up-outline"></ion-icon>
-                </div>
-
-                <div>
-                  <h3 class="h3 card-title">
-                    <a href="#">Lifestyle</a>
-                  </h3>
-
-                  <span class="card-meta">39 Course</span>
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="category-card">
-
-                <div class="card-icon">
-                  <ion-icon name="headset-outline"></ion-icon>
-                </div>
-
-                <div>
-                  <h3 class="h3 card-title">
-                    <a href="#">Digital Marketing</a>
-                  </h3>
-
-                  <span class="card-meta">39 Course</span>
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="category-card">
-
-                <div class="card-icon">
-                  <ion-icon name="server-outline"></ion-icon>
-                </div>
-
-                <div>
-                  <h3 class="h3 card-title">
-                    <a href="#">Data Sciences</a>
-                  </h3>
-
-                  <span class="card-meta">39 Course</span>
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="category-card">
-
-                <div class="card-icon">
-                  <ion-icon name="medkit-outline"></ion-icon>
-                </div>
-
-                <div>
-                  <h3 class="h3 card-title">
-                    <a href="#">Health & Fitness</a>
-                  </h3>
-
-                  <span class="card-meta">39 Course</span>
-                </div>
-
-              </div>
-            </li>
-
+            @endforeach
           </ul>
 
         </div>
       </section>
 
-
-
-
-
-      <!-- 
-        - #COURSE
-      -->
-
-      <section class="section course" id="courses" aria-label="course"
+      <section class="section course" id="properti" aria-label="course"
         style="background-image: url('{{asset('frontend/assets/images/course-bg.jpg')}}')">
         <div class="container">
 
-          <p class="section-subtitle">Popular Courses</p>
-
-          <h2 class="h2 section-title">Our Popular Courses</h2>
+          <p class="section-subtitle">Rekomendasi</p>
+          <h2 class="h2 section-title">Properti Terbaru</h2>
 
           <ul class="grid-list">
             @foreach($properti as $item)
@@ -443,20 +271,17 @@
                 </figure>
 
                 <div class="card-actions">
-                  <span class="badge">Intermediate</span>
-                  <button class="whishlist-btn" aria-label="Add to wishlist" data-whish-btn>
-                    <ion-icon name="heart"></ion-icon>
-                  </button>
+                  <span class="badge">{{$item -> kota ->nama}}</span>
                 </div>
 
                 <div class="card-content">
                   <ul class="card-meta-list">
                     <li class="card-meta-item">
-                      <ion-icon name="reader-outline" aria-hidden="true"></ion-icon>
+                      <ion-icon name="bed-outline"></ion-icon>
                       <span class="card-meta-text">{{ $item->kt }} Kamar Tidur</span>
                     </li>
                     <li class="card-meta-item">
-                      <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
+                      <ion-icon name="water-outline"></ion-icon>
                       <time class="card-meta-text">{{ $item->km }} Kamar Mandi</time>
                     </li>
                   </ul>
@@ -471,11 +296,10 @@
 
                   <div class="card-footer">
                     <div class="card-price">
-                      <span class="span">${{ $item->harga }}</span>
-                      <del class="del">$39.00</del>
+                      <span class="span">Rp.{{ number_format($item->harga, 0, ',', '.') }}</span>
                     </div>
                     <div class="card-meta-item">
-                      <ion-icon name="people-outline" aria-hidden="true"></ion-icon>
+                      <ion-icon name="expand-outline"></ion-icon>
                       <span class="card-meta-text">{{ $item->lt }} m²</span>
                     </div>
                   </div>
@@ -489,211 +313,14 @@
 
 
 
-          <a href="#" class="btn btn-primary">
-            <span class="span">View All Courses</span>
+          <a href="{{route('cari')}}" class="btn btn-primary">
+            <span class="span">Lihat Semua Properti</span>
 
             <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
           </a>
 
         </div>
       </section>
-
-
-
-
-
-      <!-- 
-        - #CTA
-      -->
-
-      <section class="section cta" aria-label="workshop" style="background-image: url('{{asset('frontend/assets/images/cta-bg.png')}}')">
-        <div class="container">
-
-          <figure class="cta-banner">
-            <img src="{{asset('frontend/assets/images/cta-banner.jpg')}}" width="580" height="380" loading="lazy" alt="cta banner"
-              class="img-cover">
-          </figure>
-
-          <div class="cta-content">
-
-            <p class="section-subtitle">Free Workshop</p>
-
-            <h2 class="h2 section-title">Join Our Free Workshops</h2>
-
-            <p class="section-text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit amet, consect adipi scing elit, sed do
-              eiusmod tempor
-              incididunt ut sed do eiusmod tempor incididunt ut labore et dolore aliqua.
-            </p>
-
-            <a href="#" class="btn btn-secondary">
-              <span class="span">Upcomming Workshop</span>
-
-              <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
-            </a>
-
-          </div>
-
-        </div>
-      </section>
-
-
-
-
-
-      <!-- 
-        - #EVENT
-      -->
-
-      <section class="section event" id="event" aria-label="event">
-        <div class="container">
-
-          <p class="section-subtitle">Upcomming Event</p>
-
-          <h2 class="h2 section-title">Let’s Join Our Community</h2>
-
-          <ul class="grid-list">
-
-            <li>
-              <div class="event-card">
-
-                <figure class="card-banner">
-                  <img src="{{asset('frontend/assets/images/event-1.jpg')}}" width="370" height="250" loading="lazy"
-                    alt="Innovation & Technological Entrepreneurship Team" class="img-cover">
-                </figure>
-
-                <time class="badge" datetime="2022-12-04">04 Dec 2022</time>
-
-                <div class="card-content">
-
-                  <address class="card-address">
-                    <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
-
-                    <span class="span">Alpaca Way Anaheim, CA 92805</span>
-                  </address>
-
-                  <h3 class="h3">
-                    <a href="#" class="card-title">Innovation & Technological Entrepreneurship Team</a>
-                  </h3>
-
-                  <a href="#" class="btn-link">
-                    <span class="span">Get Ticket</span>
-
-                    <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
-                  </a>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="event-card">
-
-                <figure class="card-banner">
-                  <img src="{{asset('frontend/assets/images/event-2.jpg')}}" width="370" height="250" loading="lazy"
-                    alt="Virtual Spring Part-time Jobs Fair for Student" class="img-cover">
-                </figure>
-
-                <time class="badge" datetime="2022-10-30">30th Oct 2022</time>
-
-                <div class="card-content">
-
-                  <address class="card-address">
-                    <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
-
-                    <span class="span">Ritter Avenue Detroit, MI 48226</span>
-                  </address>
-
-                  <h3 class="h3">
-                    <a href="#" class="card-title">Virtual Spring Part-time Jobs Fair for Student</a>
-                  </h3>
-
-                  <a href="#" class="btn-link">
-                    <span class="span">Get Ticket</span>
-
-                    <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
-                  </a>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="event-card">
-
-                <figure class="card-banner">
-                  <img src="{{asset('frontend/assets/images/event-3.jpg')}}" width="370" height="250" loading="lazy"
-                    alt="Explorations of Regional Chief Executive Network" class="img-cover">
-                </figure>
-
-                <time class="badge" datetime="2022-09-18">18th Sep 2022</time>
-
-                <div class="card-content">
-
-                  <address class="card-address">
-                    <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
-
-                    <span class="span">Stout Street York, PA 17401</span>
-                  </address>
-
-                  <h3 class="h3">
-                    <a href="#" class="card-title">Explorations of Regional Chief Executive Network</a>
-                  </h3>
-
-                  <a href="#" class="btn-link">
-                    <span class="span">Get Ticket</span>
-
-                    <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
-                  </a>
-
-                </div>
-
-              </div>
-            </li>
-
-          </ul>
-
-        </div>
-      </section>
-
-
-
-
-
-      <!-- 
-        - #NEWSLETTER
-      -->
-
-      <section class="section newsletter" aria-label="newsletter"
-        style="background-image: url('{{asset('frontend/assets/images/newsletter-bg.jpg')}}')">
-        <div class="container">
-
-          <p class="section-subtitle">Subscribe Newsletter</p>
-
-          <h2 class="h2 section-title">Get Every Latest News</h2>
-
-          <form action="" class="newsletter-form">
-
-            <div class="input-wrapper">
-              <input type="email" name="email_address" aria-label="email" placeholder="Enter your mail address" required
-                class="email-field">
-
-              <ion-icon name="mail-open-outline" aria-hidden="true"></ion-icon>
-            </div>
-
-            <button type="submit" class="btn btn-primary">
-              <span class="span">Subscribe</span>
-
-              <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
-            </button>
-
-          </form>
-
-        </div>
-      </section>
-
     </article>
   </main>
 
@@ -705,211 +332,15 @@
     - #FOOTER
   -->
 
-  <footer class="footer">
+  <footer class="footer" id="footer">
     <div class="container">
-
-      <div class="footer-top">
-
-        <div class="footer-brand">
-
-          <a href="#" class="logo">EduHome</a>
-
-          <p class="section-text">
-            It is a long established fact that a reader will be distracted by the readable content of a page when
-            looking at its
-            layout. The point of using Lorem Ipsum.
-          </p>
-
-          <ul class="social-list">
-
-            <li>
-              <a href="#" class="social-link">
-                <ion-icon name="logo-facebook"></ion-icon>
-              </a>
-            </li>
-
-            <li>
-              <a href="#" class="social-link">
-                <ion-icon name="logo-twitter"></ion-icon>
-              </a>
-            </li>
-
-            <li>
-              <a href="#" class="social-link">
-                <ion-icon name="logo-linkedin"></ion-icon>
-              </a>
-            </li>
-
-            <li>
-              <a href="#" class="social-link">
-                <ion-icon name="logo-pinterest"></ion-icon>
-              </a>
-            </li>
-
-          </ul>
-
-        </div>
-
-        <ul class="footer-list">
-
-          <li>
-            <p class="footer-list-title">Explore</p>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">
-              <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
-
-              <span class="span">About Us</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">
-              <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
-
-              <span class="span">Upcoming Events</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">
-              <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
-
-              <span class="span">Blog & News</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">
-              <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
-
-              <span class="span">FAQ Question</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">
-              <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
-
-              <span class="span">Testimonial</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">
-              <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
-
-              <span class="span">Privacy Policy</span>
-            </a>
-          </li>
-
-        </ul>
-
-        <ul class="footer-list">
-
-          <li>
-            <p class="footer-list-title">Useful Links</p>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">
-              <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
-
-              <span class="span">Contact Us</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">
-              <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
-
-              <span class="span">Pricing Plan</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">
-              <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
-
-              <span class="span">Instructor Profile</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">
-              <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
-
-              <span class="span">FAQ</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">
-              <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
-
-              <span class="span">Popular Courses</span>
-            </a>
-          </li>
-
-          <li>
-            <a href="#" class="footer-link">
-              <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
-
-              <span class="span">Terms & Conditions</span>
-            </a>
-          </li>
-
-        </ul>
-
-        <ul class="footer-list">
-
-          <li>
-            <p class="footer-list-title">Contact Info</p>
-          </li>
-
-          <li class="footer-item">
-            <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
-
-            <address class="footer-link">
-              275 Quadra Street Victoria Road, New York
-            </address>
-          </li>
-
-          <li class="footer-item">
-            <ion-icon name="call" aria-hidden="true"></ion-icon>
-
-            <a href="tel:+13647657839" class="footer-link">+ 1 (364) 765-7839</a>
-          </li>
-
-          <li class="footer-item">
-            <ion-icon name="call" aria-hidden="true"></ion-icon>
-
-            <a href="tel:+13647657840" class="footer-link">+ 1 (364) 765-7840</a>
-          </li>
-
-          <li class="footer-item">
-            <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
-
-            <a href="mailto:contact@eduhome.com" class="footer-link">contact@eduhome.com</a>
-          </li>
-
-        </ul>
-
-      </div>
-
       <div class="footer-bottom">
         <p class="copyright">
-          Copyright 2022 EduHome. All Rights Reserved by <a href="#" class="copyright-link">codewithsadee</a>
+          Copyright <span id="currentYear" style="display: inline;""></span> MyPropertiesOne. Ada pertanyaan? <a href="#" class="copyright-link">Hubungi Kami</a>
         </p>
       </div>
-
     </div>
   </footer>
-
-
-
-
 
   <!-- 
     - #BACK TO TOP
@@ -919,15 +350,16 @@
     <ion-icon name="arrow-up"></ion-icon>
   </a>
 
-
-
-
-
   <!-- 
     - custom js link
   -->
   <script src="{{asset('frontend/assets/js/script.js')}}" defer></script>
-
+  <script>
+    // Mendapatkan tahun saat ini
+    const currentYear = new Date().getFullYear();
+    // Menyisipkan tahun ke elemen dengan id "currentYear"
+    document.getElementById("currentYear").textContent = currentYear;
+  </script>
   <!-- 
     - ionicon link
   -->

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\KotaController;
 use App\Http\Controllers\Backend\SertifikatController;
 use App\Http\Controllers\PropertiController;
+use App\Models\Kota;
 use App\Models\Properti;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -20,9 +21,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     // Ambil semua data properti dari database
-    $properti = Properti::all();
-    return view('welcome', compact('properti'));
-});
+    $properti = Properti::paginate(18);
+    $kota = Kota::withCount('properti')->paginate(6);
+    return view('welcome', compact('properti', 'kota'));
+})->name('land');
+
+Route::get('/cari-properti', function () {
+    // Ambil semua data properti dari database
+    $properti = Properti::paginate(18);
+    $kota = Kota::all();
+    return view('properti', compact('properti', 'kota'));
+})->name('cari');
 
 Auth::routes();
 Route::get('/register', function () {
