@@ -341,6 +341,7 @@ body {
 }
 
 .navbar-link:is(:hover, :focus) { color: var(--ultramarine-blue); }
+.navbar-link.active { color: var(--ultramarine-blue); }
 
 .overlay {
   position: fixed;

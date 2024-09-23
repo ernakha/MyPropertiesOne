@@ -12,4 +12,8 @@ class Kota extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['id', 'nama'];
 
+    public function properti()
+    {
+        return $this->hasMany(Properti::class, 'kota_id');
+    }
 }
