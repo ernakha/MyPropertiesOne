@@ -10,7 +10,7 @@
   <!-- 
     - favicon
   -->
-  <link rel="shortcut icon" href="{{asset('frontend/assets/favicon.svg')}}" type="image/svg+xml">
+  <link rel="shortcut icon" href="{{asset('frontend/assets/images/favicon-1.png')}}">
 
   <!-- 
     - custom css link
@@ -309,9 +309,6 @@
             @endif
             @endforeach
           </ul>
-
-
-
 
           <a href="{{route('cari')}}" class="btn btn-primary">
             <span class="span">Lihat Semua Properti</span>

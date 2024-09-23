@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>My Property One</title>
-    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/favicon.png') }}" />
+    <link rel="shortcut icon" type="image/png" href="{{ asset('/assets/images/logos/favicon-1.png') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}" />
 </head>
 
@@ -21,14 +21,13 @@
                         <div class="card mb-0">
                             <div class="card-body">
                                 <a href="#" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                                    <img src="{{ asset('assets/images/logos/dark-logo.svg') }}" width="180"
+                                    <img src="{{ asset('frontend/assets/images/logo-brand3.png') }}" width="180"
                                         alt="">
                                 </a>
-                                <p class="text-center">Your Social Campaigns</p>
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
                                     <div class="mb-3">
-                                        <label for="email" class="form-label">{{ __('Email Address') }}</label>
+                                        <label for="email" class="form-label">Email</label>
                                         <input type="email" name="email"
                                             class="form-control @error('email') is-invalid @enderror" id="email"
                                             required autocomplete="email" autofocus>
@@ -40,7 +39,7 @@
                                         @enderror
                                     </div>
                                     <div class="mb-4">
-                                        <label for="password" class="form-label">{{ __('Password') }}</label>
+                                        <label for="password" class="form-label">Katasandi</label>
                                         <input type="password" name="password"
                                             class="form-control  @error('password') is-invalid @enderror" id="password"
                                             required autocomplete="current-password">
@@ -52,7 +51,7 @@
                                         @enderror
                                     </div>
                                     <button type="submit"
-                                        class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">{{ __('Login') }}</button>
+                                        class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Masuk</button>
                                 </form>
                             </div>
                         </div>

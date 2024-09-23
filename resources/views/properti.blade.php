@@ -10,7 +10,8 @@
     <!--
     - favicon
   -->
-    <link rel="shortcut icon" href="{{ asset('frontend/assets/favicon.svg') }}" type="image/svg+xml">
+    <link rel="shortcut icon" href="{{ asset('frontend/assets/images/favicon-1.png') }}">
+
 
     <!--
     - custom css link
@@ -220,8 +221,7 @@
             </button>
 
             <div class="search-wrapper">
-                <input type="search" name="search" placeholder="Search Here..." aria-label="Search"
-                    class="search-field">
+                <input type="search" name="search" placeholder="Cari..." aria-label="Search" class="search-field">
 
                 <button class="search-submit" aria-label="Submit" data-search-toggler>
                     <ion-icon name="search-outline"></ion-icon>
