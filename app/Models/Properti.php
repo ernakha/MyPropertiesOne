@@ -10,7 +10,7 @@ class Properti extends Model
     use HasFactory;
     protected $table = "properti";
     protected $primaryKey = 'id';
-    protected $fillable = ['judul', 'alamat', 'notelp', 'kota_id', 'harga', 'sertifikat_id', 'lb', 'lt', 'kt', 'km', 'garasi', 'deskripsi', 'gambar'];
+    protected $fillable = ['judul', 'alamat', 'notelp', 'kota_id', 'harga', 'sertifikat_id', 'lb', 'lt', 'kt', 'km', 'garasi', 'deskripsi', 'gambar', 'slug'];
 
     public function kota(){
         return $this->belongsTo(Kota::class,'kota_id','id');

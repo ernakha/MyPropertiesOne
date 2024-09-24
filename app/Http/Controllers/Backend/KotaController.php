@@ -12,6 +12,9 @@ class KotaController extends Controller
     public function index()
     {
         $kota = Kota::all();
+        $title = 'Delete Kota!';
+        $text = "Are you sure you want to delete?"; 
+        confirmDelete($title, $text);   
         return view('Backend.kota.index', compact('kota'));
     }
 

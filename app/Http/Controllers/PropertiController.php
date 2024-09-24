@@ -8,12 +8,16 @@ use App\Models\Sertifikat;
 use DOMDocument;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class PropertiController extends Controller
 {
     public function index()
     {
         $props = Properti::all();
+        $title = 'Delete Properti!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
         return view('backend.properti.index', compact('props'));
     }
 
@@ -53,6 +57,9 @@ class PropertiController extends Controller
             }
         }
 
+        // Generate slug otomatis dari judul
+        $slug = Str::slug($request->judul);
+
         // Simpan data properti dengan gambar yang sudah dikonversi ke JSON
         Properti::create([
             'judul' => $request->judul,
@@ -67,6 +74,7 @@ class PropertiController extends Controller
             'km' => $request->km,
             'garasi' => $request->garasi,
             'deskripsi' => $request->deskripsi,
+            'slug' => $slug,
             'gambar' => json_encode($gambarPaths), // Simpan sebagai JSON
         ]);
 
@@ -82,7 +90,8 @@ class PropertiController extends Controller
         return redirect()->route('properti.view');
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $kota = Kota::all();
         $sertif = Sertifikat::all();
         $editProperti = Properti::find($id);
@@ -122,6 +131,9 @@ class PropertiController extends Controller
             }
         }
 
+        // Generate slug otomatis dari judul
+        $slug = Str::slug($request->judul);
+
         // Update data properti dengan gambar yang sudah dikonversi ke JSON
         $properti->update([
             'judul' => $request->judul,
@@ -136,6 +148,7 @@ class PropertiController extends Controller
             'km' => $request->km,
             'garasi' => $request->garasi,
             'deskripsi' => $request->deskripsi,
+            'slug' => $slug,
             'gambar' => json_encode($gambarPaths), // Simpan gambar sebagai JSON
         ]);
 
@@ -147,5 +160,20 @@ class PropertiController extends Controller
 
         toast('Your data has been updated!', 'success');
         return redirect()->route('properti.view');
+    }
+
+    public function delete($id)
+    {
+        $properti = Properti::find($id);
+        $properti->delete();
+        toast('Your data as been deleted!', 'success');
+        return redirect()->route('properti.view');
+    }
+
+    // Menampilkan modal detail data fast-boat
+    public function show($id)
+    {
+        $properti = Properti::with(['kota', 'sertifikat'])->findOrFail($id); // Mengambil seluruh data fast-boat beserta company nya
+        return response()->json($properti);
     }
 }
