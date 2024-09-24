@@ -32,7 +32,7 @@
                             <td>{{$loop->iteration}}</td>
                             <td>
                                 <div class="avatar">
-                                    <div class="product-img avatar-title img-thumbnail bg-primary-subtle border-0">
+                                    <div>
                                         @php
                                         $gambarPaths = json_decode($item->gambar);
                                         @endphp
@@ -43,10 +43,10 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>{{$item->judul}}</td>
+                            <td>{{Str::limit($item->judul, 20)}}</td>
                             <td>{{$item->notelp}}</td>
                             <td>{{$item->kota->nama}}</td>
-                            <td>{{ number_format($item->harga, 0, ',', '.') }}</td>
+                            <td>Rp.{{ number_format($item->harga, 0, ',', '.') }}</td>
                             <td>
                                 <div class="dropstart">
                                     <a class="text-muted dropdown-toggle font-size-18" role="button" data-bs-toggle="dropdown" aria-haspopup="true">

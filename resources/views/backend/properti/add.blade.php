@@ -55,7 +55,7 @@
                         <div class="mb-3">
                             <label for="lb" class="form-label">Lebar Bangunan</label>
                             <div class="input-group">
-                                <input type="number" class="form-control" id="lb" name="lb">
+                                <input type="number" class="form-control" id="lb" min="0" name="lb">
                                 <span class="input-group-text">m<sup>2</sup></span>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                         <div class="mb-3">
                             <label for="lt" class="form-label">Luas Tanah</label>
                             <div class="input-group">
-                                <input type="number" class="form-control" id="lt" name="lt" required>
+                                <input type="number" class="form-control" id="lt" name="lt" min="0" required>
                                 <span class="input-group-text">m<sup>2</sup></span>
                             </div>
                         </div>
@@ -74,13 +74,13 @@
                     <div class="col-md-4">
                         <div class="mb-3">
                             <label for="kt" class="form-label">Kamar Tidur</label>
-                            <input type="number" class="form-control" id="kt" name="kt">
+                            <input type="number" class="form-control" id="kt" name="kt" min="0">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="mb-3">
                             <label for="km" class="form-label">Kamar Mandi</label>
-                            <input type="number" class="form-control" id="km" name="km">
+                            <input type="number" class="form-control" id="km" name="km" min="0">
 
                         </div>
                     </div>
@@ -88,7 +88,7 @@
                     <div class="col-md-4">
                         <div class="mb-3">
                             <label for="garasi" class="form-label">Garasi</label>
-                            <input type="number" class="form-control" id="garasi" name="garasi">
+                            <input type="number" class="form-control" id="garasi" name="garasi" min="0" value="0">
                         </div>
                     </div>
                 </div>
@@ -151,6 +151,16 @@
             var hargaAsli = $('#harga').val().replace(/\./g, '');
             $('#harga').val(hargaAsli);
         });
+    });
+
+    document.getElementById('notelp').addEventListener('input', function (e) {
+        var value = e.target.value;
+        e.target.value = value.replace(/\D/g, ''); // Hanya angka yang diizinkan
+    });
+
+    document.getElementById('harga').addEventListener('input', function (e) {
+        var value = e.target.value;
+        e.target.value = value.replace(/\D/g, ''); // Hanya angka yang diizinkan
     });
 </script>
 @endsection
