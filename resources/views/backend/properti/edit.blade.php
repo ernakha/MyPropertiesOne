@@ -129,5 +129,28 @@
             ]
         });
     });
+
+    $(document).ready(function() {
+        // Fungsi untuk menambahkan titik sebagai pemisah ribuan
+        function formatRibuan(angka) {
+            return angka.replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
+
+        // Event untuk memformat harga saat user mengetik
+        $('#harga').on('keyup', function() {
+            // Ambil nilai dari input
+            var input = $(this).val();
+
+            // Format angka dengan pemisah ribuan
+            $(this).val(formatRibuan(input));
+        });
+
+        // Event sebelum form disubmit
+        $('form').on('submit', function() {
+            // Hapus pemisah ribuan sebelum data dikirim ke server
+            var hargaAsli = $('#harga').val().replace(/\./g, '');
+            $('#harga').val(hargaAsli);
+        });
+    });
 </script>
 @endsection

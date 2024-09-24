@@ -46,14 +46,18 @@
                             <td>{{$item->judul}}</td>
                             <td>{{$item->notelp}}</td>
                             <td>{{$item->kota->nama}}</td>
-                            <td>{{$item->harga}}</td>
+                            <td>{{ number_format($item->harga, 0, ',', '.') }}</td>
                             <td>
-                                <center>
-                                    <a class="btn btn-outline-warning" href="{{route('properti.edit', $item->id)}}"><i class="ti ti-edit"></i>Edit</a>
-                                    <a class="btn btn-outline-danger" data-confirm-delete="true" href="#">
-                                        <i class="ti ti-trash"></i> Hapus
+                                <div class="dropstart">
+                                    <a class="text-muted dropdown-toggle font-size-18" role="button" data-bs-toggle="dropdown" aria-haspopup="true">
+                                        <i class="ti ti-dots-horizontal"></i>
                                     </a>
-                                </center>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a class="dropdown-item" href="{{route('properti.edit', $item->id)}}"></i>Edit</a>
+                                        <a class="dropdown-item" data-confirm-delete="true" href="{{route('properti.delete', $item->id)}}"></i> Hapus</a>
+                                        <a class="dropdown-item" href="javascript:void(0)" id="showDetail" data-url="{{route('properti.show', $item->id)}}">View</a>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         @endforeach
@@ -62,9 +66,63 @@
             </div>
         </div>
     </div>
+
+    <!-- Scrollable modal for view detail -->
+    <div class="modal fade" id="viewDetailModal" tabindex="-1" role="dialog"
+        aria-labelledby="viewDetailModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewDetailModalTitle">Properti Information</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Judul : </strong><span id="judul"></span></p>
+                    <p><strong>Alamat : </strong><span id="alamat"></span></p>
+                    <p><strong>No Telepon : </strong><span id="notelp"></span></p>
+                    <p><strong>Kota : </strong><span id="kota"></span></p>
+                    <p><strong>Harga : </strong><span id="harga"></span></p>
+                    <p><strong>Sertifikat : </strong><span id="sertifikat"></span></p>
+                    <p><strong>Lebar Bangunan : </strong><span id="lb"></span></p>
+                    <p><strong>Luas Tanah : </strong><span id="lt"></span></p>
+                    <p><strong>Kamar Tidur : </strong><span id="kt"></span></p>
+                    <p><strong>Kamar Mandi : </strong><span id="km"></span></p>
+                    <p><strong>Garasi : </strong><span id="garasi"></span></p>
+                    <p><strong>Deskripsi : </strong><span id="deskripsi"></span></p>
+                    <p><strong>Slug : </strong><span id="slug"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </div>
 @endsection
 
 @section('script')
-<script></script>
+{{-- javascript to get data from database & view in modal --}}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('body').on('click', '#showDetail', function() {
+            var detailURL = $(this).data('url');
+            $.get(detailURL, function(data) {
+                $('#viewDetailModal').modal('show');
+                $('#judul').text(data.judul);
+                $('#alamat').text(data.alamat);
+                $('#notelp').text(data.notelp);
+                $('#kota').text(data.kota.nama);
+                $('#harga').text(data.harga.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' }));
+                $('#sertifikat').text(data.sertifikat.kode);
+                $('#lb').text(data.lb);
+                $('#lt').text(data.lt);
+                $('#kt').text(data.km);
+                $('#garasi').text(data.garasi);
+                // Gunakan html() untuk deskripsi agar HTML di dalamnya diproses
+                $('#deskripsi').html(data.deskripsi);
+                $('#slug').text(data.slug);
+            });
+        });
+    });
+</script>
 @endsection

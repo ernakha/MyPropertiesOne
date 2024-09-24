@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('garasi');
             $table->text('deskripsi');
             $table->text('gambar');
+            $table->string('slug');
             $table->timestamps();
         });
     }

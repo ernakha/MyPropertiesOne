@@ -64,11 +64,12 @@ Route::middleware([
         Route::post('/properti/store', [PropertiController::class, 'store'])->name('properti.store');
         Route::get('/properti/edit/{id}',  [PropertiController::class, 'edit'])->name('properti.edit');
         Route::post('/properti/update/{id}', [PropertiController::class, 'update'])->name('properti.update');
-        Route::get('/properti/delete/{$id}', [PropertiController::class, 'delete'])->name('properti.delete');
+        Route::delete('/properti/delete/{id}', [PropertiController::class, 'delete'])->name('properti.delete');
         Route::get('/properti/view/{id}',  function ($id) {
             $props = Properti::find($id);
             $gambar = json_decode($props->gambar);
             return view('backend.properti.view', compact('props', 'gambar'));
-        })->name('properti.edit');
+        })->name('properti.see');
+        Route::get('/properti/{id}',  [PropertiController::class, 'show'])->name('properti.show');
     });
 });

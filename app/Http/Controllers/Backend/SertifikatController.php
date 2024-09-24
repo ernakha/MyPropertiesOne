@@ -11,6 +11,9 @@ class SertifikatController extends Controller
 {
     public function index(){
         $sertifikat = Sertifikat::all();
+        $title = 'Delete Sertifikat!';
+        $text = "Are you sure you want to delete?"; 
+        confirmDelete($title, $text);   
         return view('backend.sertifikat.index', compact('sertifikat'));
     }
 
