@@ -109,7 +109,7 @@
         <ul class="navbar-list">
 
           <li class="navbar-item">
-            <a href="#home" class="navbar-link" data-nav-toggler>Home</a>
+            <a href="#home" class="navbar-link" data-nav-toggler>Beranda</a>
           </li>
 
           <li class="navbar-item">
@@ -189,7 +189,7 @@
               Temukan Rumah yang Sesuai Gaya Hidup Anda. Jelajahi ribuan pilihan properti yang disesuaikan dengan kebutuhan Anda.
             </p>
 
-            <a href="#properti" class="btn btn-primary">
+            <a href="{{route('cari')}}" class="btn btn-primary">
               <span class="span">Cari Properti</span>
 
               <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
@@ -287,7 +287,7 @@
                   </ul>
 
                   <h3 class="h3">
-                    <a href="#" class="card-title">{{ $item->judul }} {{ $item->kota->nama }}</a>
+                    <a href="#" class="card-title">{{ Str::limit($item->judul, 20) }} {{ $item->kota->nama }}</a>
                   </h3>
 
                   <div class="rating-wrapper">

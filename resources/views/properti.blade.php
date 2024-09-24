@@ -172,7 +172,7 @@
                 <ul class="navbar-list">
 
                     <li class="navbar-item">
-                        <a href="/#home" class="navbar-link" data-nav-toggler>Home</a>
+                        <a href="/#home" class="navbar-link" data-nav-toggler>Beranda</a>
                     </li>
 
                     <li class="navbar-item">
@@ -376,7 +376,7 @@
                                             </ul>
 
                                             <h3 class="h3">
-                                                <a href="#" class="card-title">{{ $item->judul }}
+                                                <a href="#" class="card-title">{{ Str::limit($item->judul, 20)}}
                                                     {{ $item->kota->nama }}</a>
                                             </h3>
 
