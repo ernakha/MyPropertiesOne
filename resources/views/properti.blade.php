@@ -231,14 +231,14 @@
                                     <div class="filter-item">
                                         <label for="keyword">Keyword</label>
                                         <input type="text" name="keyword" value="{{ old('keyword', '') }}" id="keyword" class="form-input"
-                                            placeholder="Masukkan keyword..." >
+                                            placeholder="Masukkan keyword...">
                                     </div>
                                     <div class="filter-item">
                                         <label for="kota">Kota</label>
                                         <select name="kota" id="kota" class="form-select">
                                             <option value="">Semua Kota</option>
                                             @foreach ($kota as $city)
-                                                <option value="{{ $city->id }}">{{ $city->nama }}</option>
+                                            <option value="{{ $city->id }}">{{ $city->nama }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -323,65 +323,61 @@
                             </form>
                         </div>
                     </div>
-
                     <ul class="grid-list">
-                        @foreach ($properti as $item)
-                            @php
-                                $gambarArray = json_decode($item->gambar);
-                            @endphp
+                        @foreach($properti as $item)
+                        @php
+                        $gambarArray = json_decode($item->gambar);
+                        @endphp
 
-                            @if ($gambarArray && count($gambarArray) > 0)
-                                <li>
-                                    <div class="course-card">
-                                        <figure class="card-banner">
-                                            <!-- Menampilkan gambar pertama dan memastikan ukurannya sesuai dengan card -->
-                                            <img src="{{ asset('storage/' . $gambarArray[0]) }}"
-                                                class="img-fluid dynamic-img card-image" alt="Gambar Properti"
-                                                loading="lazy">
-                                        </figure>
+                        @if($gambarArray && count($gambarArray) > 0)
+                        <li>
+                            <a href="{{ route('detail', ['slug' => $item->slug]) }}" class="card-link">
+                                <div class="course-card">
+                                    <figure class="card-banner">
+                                        <!-- Menampilkan gambar pertama dan memastikan ukurannya sesuai dengan card -->
+                                        <img src="{{ asset('storage/' . $gambarArray[0]) }}"
+                                            class="img-fluid dynamic-img card-image" alt="Gambar Properti"
+                                            loading="lazy">
+                                    </figure>
 
-                                        <div class="card-actions">
-                                            <span class="badge">{{ $item->kota->nama }}</span>
+                                    <div class="card-actions">
+                                        <span class="badge">{{ $item->kota->nama }}</span>
+                                    </div>
+
+                                    <div class="card-content">
+                                        <ul class="card-meta-list">
+                                            <li class="card-meta-item">
+                                                <ion-icon name="bed-outline"></ion-icon>
+                                                <span class="card-meta-text">{{ $item->kt }} Kamar Tidur</span>
+                                            </li>
+                                            <li class="card-meta-item">
+                                                <ion-icon name="water-outline"></ion-icon>
+                                                <time class="card-meta-text">{{ $item->km }} Kamar Mandi</time>
+                                            </li>
+                                        </ul>
+
+                                        <h3 class="h3">
+                                            {{ Str::limit($item->judul, 20) }} {{ $item->kota->nama }}
+                                        </h3>
+
+                                        <div class="rating-wrapper">
+                                            <span class="rating-text">{{ $item->alamat }}</span>
                                         </div>
 
-                                        <div class="card-content">
-                                            <ul class="card-meta-list">
-                                                <li class="card-meta-item">
-                                                    <ion-icon name="bed-outline"></ion-icon>
-                                                    <span class="card-meta-text">{{ $item->kt }} Kamar
-                                                        Tidur</span>
-                                                </li>
-                                                <li class="card-meta-item">
-                                                    <ion-icon name="water-outline"></ion-icon>
-                                                    <time class="card-meta-text">{{ $item->km }} Kamar
-                                                        Mandi</time>
-                                                </li>
-                                            </ul>
-
-                                            <h3 class="h3">
-                                                <a href="#"
-                                                    class="card-title">{{ Str::limit($item->judul, 20) }}
-                                                    {{ $item->kota->nama }}</a>
-                                            </h3>
-
-                                            <div class="rating-wrapper">
-                                                <span class="rating-text">{{ $item->alamat }}</span>
+                                        <div class="card-footer">
+                                            <div class="card-price">
+                                                <span class="span">Rp.{{ number_format($item->harga, 0, ',', '.') }}</span>
                                             </div>
-
-                                            <div class="card-footer">
-                                                <div class="card-price">
-                                                    <span
-                                                        class="span">Rp.{{ number_format($item->harga, 0, ',', '.') }}</span>
-                                                </div>
-                                                <div class="card-meta-item">
-                                                    <ion-icon name="expand-outline"></ion-icon>
-                                                    <span class="card-meta-text">{{ $item->lt }} m²</span>
-                                                </div>
+                                            <div class="card-meta-item">
+                                                <ion-icon name="expand-outline"></ion-icon>
+                                                <span class="card-meta-text">{{ $item->lt }} m²</span>
                                             </div>
                                         </div>
                                     </div>
-                                </li>
-                            @endif
+                                </div>
+                            </a> <!-- Tutup tag <a> -->
+                        </li>
+                        @endif
                         @endforeach
                     </ul>
                 </div>
@@ -398,7 +394,7 @@
             <div class="footer-bottom">
                 <p class="copyright">
                     Copyright <span id="currentYear" style="display: inline;""></span> MyPropertiesOne. Ada
-                    pertanyaan? <a href="#" class="copyright-link">Hubungi Kami</a>
+                    pertanyaan? <a href=" #" class="copyright-link">Hubungi Kami</a>
                 </p>
             </div>
         </div>

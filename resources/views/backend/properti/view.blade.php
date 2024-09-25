@@ -3,6 +3,8 @@
     {!! $props->deskripsi !!}
 </div>
 
+
+
 <div class="container my-5">
     <h2 class="mb-4 text-center">{{ $props->judul }}</h2>
     <div class="swiper-container">
