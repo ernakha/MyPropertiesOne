@@ -193,7 +193,7 @@
 
             <div class="header-actions">
 
-                <button class="header-action-btn" aria-label="Open search" data-search-toggler>
+                <button class="header-action-btn" id="filterBtn" aria-label="Open filter">
                     <ion-icon name="search-outline"></ion-icon>
                 </button>
 
@@ -202,34 +202,12 @@
                     <ion-icon name="menu-outline"></ion-icon>
                 </button>
 
-                <button class="header-action-btn" id="filterBtn" aria-label="Open filter">
-                    <ion-icon name="filter-outline"></ion-icon>
-                </button>
-
             </div>
 
             <div class="overlay" data-nav-toggler data-overlay></div>
 
         </div>
     </header>
-
-    <div class="search-container" data-search-box>
-        <div class="container">
-
-            <button class="search-close-btn" aria-label="Close search" data-search-toggler>
-                <ion-icon name="close-outline"></ion-icon>
-            </button>
-
-            <div class="search-wrapper">
-                <input type="search" name="search" placeholder="Cari..." aria-label="Search" class="search-field">
-
-                <button class="search-submit" aria-label="Submit" data-search-toggler>
-                    <ion-icon name="search-outline"></ion-icon>
-                </button>
-            </div>
-
-        </div>
-    </div>
 
 
     <main>
@@ -248,8 +226,13 @@
                             <h3>Filter Properti</h3>
 
                             <!-- Filter Form -->
-                            <form id="filterForm" method="GET" action="#">
+                            <form id="filterForm" method="GET" action="{{ route('properti.search') }}">
                                 <div class="filter-group">
+                                    <div class="filter-item">
+                                        <label for="keyword">Keyword</label>
+                                        <input type="text" name="keyword" value="{{ old('keyword', '') }}" id="keyword" class="form-input"
+                                            placeholder="Masukkan keyword..." >
+                                    </div>
                                     <div class="filter-item">
                                         <label for="kota">Kota</label>
                                         <select name="kota" id="kota" class="form-select">
@@ -334,7 +317,7 @@
                                     </div>
 
                                     <div class="filter-item">
-                                        <button type="submit" class="btn btn-primary">Terapkan Filter</button>
+                                        <button type="submit" class="btn btn-primary">Cari</button>
                                     </div>
                                 </div>
                             </form>
@@ -376,7 +359,8 @@
                                             </ul>
 
                                             <h3 class="h3">
-                                                <a href="#" class="card-title">{{ Str::limit($item->judul, 20)}}
+                                                <a href="#"
+                                                    class="card-title">{{ Str::limit($item->judul, 20) }}
                                                     {{ $item->kota->nama }}</a>
                                             </h3>
 
@@ -400,7 +384,6 @@
                             @endif
                         @endforeach
                     </ul>
-                    {{ $properti->links('pagination::bootstrap-5') }}
                 </div>
             </section>
         </article>
