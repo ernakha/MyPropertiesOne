@@ -175,7 +175,7 @@
           </li>
 
           <li class="navbar-item">
-            <a href="#kota" class="navbar-link" data-nav-toggler>Kota</a>
+            <a href="#kotaa" class="navbar-link" data-nav-toggler>Kota</a>
           </li>
 
           <li class="navbar-item">
@@ -366,7 +366,7 @@
         - #CATEGORY
       -->
 
-      <section class="section category" id="kota" aria-label="category">
+      <section class="section category" id="kotaa" aria-label="category">
         <div class="container">
 
           <p class="section-subtitle">Kota-kota</p>
