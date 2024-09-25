@@ -38,6 +38,7 @@ Route::get('/register', function () {
     return redirect('/login');
 });
 
+Route::get('/search', [PropertiController::class, 'search'])->name('properti.search');
 
 Route::middleware([
     'auth:sanctum',

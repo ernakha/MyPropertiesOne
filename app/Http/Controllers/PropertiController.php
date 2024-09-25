@@ -176,4 +176,114 @@ class PropertiController extends Controller
         $properti = Properti::with(['kota', 'sertifikat'])->findOrFail($id); // Mengambil seluruh data fast-boat beserta company nya
         return response()->json($properti);
     }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $jumlahKamar = $request->input('jumlahKamar');
+        $luasTanah = $request->input('luasTanah');
+        $minHarga = $request->input('minHarga');
+        $maxHarga = $request->input('maxHarga');
+        $kota = $request->input('kota');
+
+        $query = Properti::query();
+
+        // Filter berdasarkan kota terlebih dahulu jika dipilih
+        if ($kota) {
+            $query->where('kota_id', $kota);
+        }
+
+        // Pencarian berdasarkan keyword pada judul atau nama kota
+        if ($keyword) {
+            $query->where(function ($q) use ($keyword) {
+                $q->where('judul', 'LIKE', "%$keyword%")
+                    ->orWhereHas('kota', function ($q) use ($keyword) {
+                        $q->where('nama', 'LIKE', "%$keyword%");
+                    });
+            });
+        }
+
+        // Filter jumlah kamar
+        if ($jumlahKamar) {
+            $query->where('kt', '>=', $jumlahKamar);
+        }
+
+        // Filter luas tanah
+        if ($luasTanah) {
+            switch ($luasTanah) {
+                case 1:
+                    $query->where('lt', '<', 50);
+                    break;
+                case 2:
+                    $query->where('lt', '>=', 50);
+                    break;
+                case 3:
+                    $query->where('lt', '>=', 100);
+                    break;
+                case 4:
+                    $query->where('lt', '>=', 200);
+                    break;
+                case 5:
+                    $query->where('lt', '>=', 300);
+                    break;
+                case 6:
+                    $query->where('lt', '>=', 500);
+                    break;
+            }
+        }
+
+        // Filter harga minimum
+        if ($minHarga) {
+            switch ($minHarga) {
+                case 1:
+                    $query->where('harga', '<=', 500000000); // <= 500 Juta
+                    break;
+                case 2:
+                    $query->where('harga', '<=', 1000000000); // <= 1 Milyar
+                    break;
+                case 3:
+                    $query->where('harga', '<=', 10000000000); // <= 10 Milyar
+                    break;
+                case 4:
+                    $query->where('harga', '<=', 20000000000); // <= 20 Milyar
+                    break;
+                case 5:
+                    $query->where('harga', '<=', 50000000000); // <= 50 Milyar
+                    break;
+                case 6:
+                    $query->where('harga', '<=', 100000000000); // <= 100 Milyar
+                    break;
+            }
+        }
+
+        // Filter harga maksimum
+        if ($maxHarga) {
+            switch ($maxHarga) {
+                case 1:
+                    $query->where('harga', '>=', 500000000); // >= 500 Juta
+                    break;
+                case 2:
+                    $query->where('harga', '>=', 1000000000); // >= 1 Milyar
+                    break;
+                case 3:
+                    $query->where('harga', '>=', 10000000000); // >= 10 Milyar
+                    break;
+                case 4:
+                    $query->where('harga', '>=', 20000000000); // >= 20 Milyar
+                    break;
+                case 5:
+                    $query->where('harga', '>=', 50000000000); // >= 50 Milyar
+                    break;
+                case 6:
+                    $query->where('harga', '>=', 100000000000); // >= 100 Milyar
+                    break;
+            }
+        }
+
+        // Mendapatkan hasil properti dan semua data kota
+        $properti = $query->get();
+        $kota = Kota::all();
+
+        return view('properti', compact('properti', 'kota'));
+    }
 }
