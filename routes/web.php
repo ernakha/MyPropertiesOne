@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\SertifikatController;
 use App\Http\Controllers\PropertiController;
 use App\Models\Kota;
 use App\Models\Properti;
+use App\Models\Sertifikat;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,13 @@ Route::get('/cari-properti', function () {
     $kota = Kota::all();
     return view('properti', compact('properti', 'kota'));
 })->name('cari');
+
+Route::get('/detail/{slug}', function ($slug) {
+    $properti = Properti::where('slug', $slug)->firstOrFail();
+    $kota = Kota::all();
+    $sertifikat = Sertifikat::all();
+    return view('detail', compact('properti', 'kota', 'sertifikat'));
+})->name('detail');
 
 Auth::routes();
 Route::get('/register', function () {
