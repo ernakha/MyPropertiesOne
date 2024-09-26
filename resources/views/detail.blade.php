@@ -19,7 +19,8 @@
   -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
 
 
@@ -224,8 +225,8 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             z-index: 10;
             cursor: pointer;
             background-color: rgba(0, 0, 0, 0.5);
@@ -234,11 +235,11 @@
         }
 
         .carousel-control-prev {
-            left: 15px;
+            left: 20px;
         }
 
         .carousel-control-next {
-            right: 170px;
+            right: 20px;
         }
 
         .btn {
@@ -280,6 +281,34 @@
             position: relative;
             z-index: 1;
             /* Pastikan judul tetap di atas layer tombol */
+        }
+
+        #zoomContainer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        #zoomImage {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        #closeZoom {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
         }
     </style>
 
@@ -326,17 +355,13 @@
 
             <div class="header-actions">
 
-                <button class="header-action-btn" aria-label="Open search" data-search-toggler>
-                    <ion-icon name="search-outline"></ion-icon>
+                <button class="header-action-btn" onclick="window.history.back();" data-search-toggler>
+                    <ion-icon name="arrow-back-outline"></ion-icon>
                 </button>
 
 
                 <button class="header-action-btn nav-open-btn" aria-label="Open menu" data-nav-toggler>
                     <ion-icon name="menu-outline"></ion-icon>
-                </button>
-
-                <button class="header-action-btn" id="filterBtn" aria-label="Open filter">
-                    <ion-icon name="filter-outline"></ion-icon>
                 </button>
 
             </div>
@@ -349,8 +374,6 @@
         <article>
             <section class="section course" id="properti" aria-label="course"
                 style="background-image: url('{{ asset('frontend/assets/images/course-bg.jpg') }}')">
-                <!-- Tombol Kembali -->
-                <button onclick="window.history.back();" class="btn btn-secondary mb-3"><ion-icon name="arrow-back-outline"></ion-icon></button>
 
                 <div class="container">
 
@@ -363,15 +386,17 @@
                         <div class="carousel-inner">
                             @php $gambarArray = json_decode($properti->gambar); @endphp
                             @if ($gambarArray && count($gambarArray) > 0)
-                            @foreach ($gambarArray as $index => $image)
-                            <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                                <img src="{{ asset('storage/' . $image) }}" class="d-block w-100 carousel-image" alt="{{ $properti->judul }}">
-                            </div>
-                            @endforeach
+                                @foreach ($gambarArray as $index => $image)
+                                    <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                        <img src="{{ asset('storage/' . $image) }}"
+                                            class="d-block w-100 carousel-image" alt="{{ $properti->judul }}">
+                                    </div>
+                                @endforeach
                             @else
-                            <div class="carousel-item active">
-                                <img src="path_to_placeholder_image.jpg" class="d-block w-100 carousel-image" alt="No Image Available">
-                            </div>
+                                <div class="carousel-item active">
+                                    <img src="path_to_placeholder_image.jpg" class="d-block w-100 carousel-image"
+                                        alt="No Image Available">
+                                </div>
                             @endif
                         </div>
 
@@ -385,9 +410,8 @@
                             <span class="sr-only">Next</span>
                         </a>
                     </div>
-
-
-                    <div class="property-detail-wrapper">
+                    <br>
+                    <div class="">
                         <div class="property-info-wrapper">
                             <div class="property-info">
                                 <br>
@@ -395,7 +419,8 @@
                                 <br>
                                 <p class="property"><strong>Telepon:</strong> {{ $properti->notelp }}</p>
                                 <p class="property"><strong>Lokasi:</strong> {{ $properti->alamat }}</p>
-                                <p class="property"><strong>Harga:</strong> Rp.{{ number_format($properti->harga, 0, ',', '.') }}</p>
+                                <p class="property"><strong>Harga:</strong>
+                                    Rp.{{ number_format($properti->harga, 0, ',', '.') }}</p>
                                 <div class="property-meta">
                                     <p><strong>Luas Bangunan:</strong> {{ $properti->lb }} m²</p>
                                     <p><strong>Luas Tanah:</strong> {{ $properti->lt }} m²</p>
@@ -416,6 +441,13 @@
             </section>
         </article>
     </main>
+    <!-- Fullscreen Image Zoom -->
+    <div id="zoomContainer"
+        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:1000;">
+        <span id="closeZoom"
+            style="position:absolute; top:20px; right:20px; font-size:40px; color:white; cursor:pointer;">&times;</span>
+        <img id="zoomImage" src="" alt="Zoomed Image" style="max-width:90%; max-height:90%;">
+    </div>
 
     <footer class="footer" id="footer">
         <div class="container">
@@ -438,6 +470,37 @@
         const currentYear = new Date().getFullYear();
         document.getElementById("currentYear").textContent = currentYear;
     </script>
+    <script>
+        // Script to handle image click for zoom effect
+        document.addEventListener('DOMContentLoaded', function() {
+            const carouselImages = document.querySelectorAll('.carousel-item img'); // Select all carousel images
+            const zoomContainer = document.getElementById('zoomContainer');
+            const zoomImage = document.getElementById('zoomImage');
+            const closeZoom = document.getElementById('closeZoom');
+
+            // Function to display the zoomed image in fullscreen
+            carouselImages.forEach(function(image) {
+                image.addEventListener('click', function() {
+                    zoomImage.src = this
+                    .src; // Set the zoom image source to the clicked image source
+                    zoomContainer.style.display = 'flex'; // Show the zoom container
+                });
+            });
+
+            // Function to close the zoomed image when "X" is clicked
+            closeZoom.addEventListener('click', function() {
+                zoomContainer.style.display = 'none'; // Hide the zoom container
+            });
+
+            // Close the zoomed image when clicking outside the image
+            zoomContainer.addEventListener('click', function(e) {
+                if (e.target !== zoomImage) {
+                    zoomContainer.style.display = 'none'; // Hide the zoom container
+                }
+            });
+        });
+    </script>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
