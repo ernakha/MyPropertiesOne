@@ -345,6 +345,139 @@
             color: white;
             cursor: pointer;
         }
+
+        /* Styling untuk form container */
+        #contact-form {
+            margin-top: 10px;
+            /* Jarak antara tombol dan form */
+            padding: 15px;
+            /* Padding di dalam form */
+            border: 1px solid #ccc;
+            /* Garis batas */
+            border-radius: 5px;
+            /* Sudut membulat */
+            background-color: #f9f9f9;
+            /* Warna latar belakang */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            /* Bayangan halus */
+        }
+
+        /* Styling untuk label */
+        #contact-form label {
+            display: block;
+            /* Mengatur label menjadi blok */
+            margin-bottom: 5px;
+            /* Jarak di bawah label */
+            font-weight: bold;
+            /* Teks label menjadi tebal */
+        }
+
+        /* Styling untuk input */
+        #contact-form input[type="text"] {
+            width: 100%;
+            /* Memperlebar input agar memenuhi lebar form */
+            padding: 10px;
+            /* Padding dalam input */
+            margin-bottom: 15px;
+            /* Jarak di bawah input */
+            border: 1px solid #ccc;
+            /* Garis batas input */
+            border-radius: 5px;
+            /* Sudut membulat */
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            /* Bayangan dalam */
+        }
+
+        /* Styling untuk button */
+        #contact-form button {
+            width: 100%;
+            /* Memperlebar tombol agar memenuhi lebar form */
+            padding: 10px;
+            /* Padding dalam tombol */
+            background-color: #007bff;
+            /* Warna latar belakang tombol */
+            color: white;
+            /* Warna teks tombol */
+            border: none;
+            /* Menghilangkan garis batas */
+            border-radius: 5px;
+            /* Sudut membulat tombol */
+            cursor: pointer;
+            /* Menunjukkan bahwa tombol dapat diklik */
+            font-size: 16px;
+            /* Ukuran font tombol */
+            transition: background-color 0.3s;
+            /* Transisi untuk efek hover */
+        }
+
+        /* Efek hover pada tombol */
+        #contact-form button:hover {
+            background-color: #0056b3;
+            /* Warna latar belakang saat hover */
+        }
+
+        #otp-confirmation-form {
+            background-color: #f9f9f9;
+            /* Latar belakang form */
+            border: 1px solid #ddd;
+            /* Garis batas */
+            border-radius: 5px;
+            /* Sudut melengkung */
+            padding: 20px;
+            /* Ruang dalam form */
+            margin-top: 20px;
+            /* Jarak dari elemen sebelumnya */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            /* Bayangan */
+        }
+
+        #otp-confirmation-form label {
+            display: block;
+            /* Membuat label dalam satu baris */
+            margin-bottom: 5px;
+            /* Jarak bawah label */
+            font-weight: bold;
+            /* Tebal untuk label */
+        }
+
+        #otp-confirmation-form input[type="text"] {
+            width: 100%;
+            /* Mengatur lebar input sesuai lebar form */
+            padding: 10px;
+            /* Ruang dalam input */
+            margin-bottom: 15px;
+            /* Jarak bawah input */
+            border: 1px solid #ccc;
+            /* Garis batas input */
+            border-radius: 4px;
+            /* Sudut melengkung input */
+            font-size: 16px;
+            /* Ukuran font */
+        }
+
+        #otp-confirmation-form button {
+            background-color: #007bff;
+            /* Warna latar belakang button */
+            color: #fff;
+            /* Warna teks button */
+            padding: 10px;
+            /* Ruang dalam button */
+            border: none;
+            /* Hilangkan garis batas */
+            border-radius: 4px;
+            /* Sudut melengkung button */
+            cursor: pointer;
+            /* Kursor pointer saat hover */
+            font-size: 16px;
+            /* Ukuran font button */
+            width: 100%;
+            /* Mengatur lebar button sama dengan input */
+        }
+
+        #otp-confirmation-form button:hover {
+            background-color: #0056b3;
+            /* Warna latar belakang button saat hover */
+        }
     </style>
 
     <header class="header" data-header>
@@ -407,6 +540,11 @@
 
     <main>
         <article>
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
             <section class="section course" id="properti" aria-label="course"
                 style="background-image: url('{{ asset('frontend/assets/images/course-bg.jpg') }}')">
 
@@ -421,17 +559,17 @@
                         <div class="carousel-inner">
                             @php $gambarArray = json_decode($properti->gambar); @endphp
                             @if ($gambarArray && count($gambarArray) > 0)
-                            @foreach ($gambarArray as $index => $image)
-                            <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                                <img src="{{ asset('storage/' . $image) }}"
-                                    class="d-block w-100 carousel-image" alt="{{ $properti->judul }}">
-                            </div>
-                            @endforeach
+                                @foreach ($gambarArray as $index => $image)
+                                    <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                        <img src="{{ asset('storage/' . $image) }}"
+                                            class="d-block w-100 carousel-image" alt="{{ $properti->judul }}">
+                                    </div>
+                                @endforeach
                             @else
-                            <div class="carousel-item active">
-                                <img src="path_to_placeholder_image.jpg" class="d-block w-100 carousel-image"
-                                    alt="No Image Available">
-                            </div>
+                                <div class="carousel-item active">
+                                    <img src="path_to_placeholder_image.jpg" class="d-block w-100 carousel-image"
+                                        alt="No Image Available">
+                                </div>
                             @endif
                         </div>
 
@@ -446,26 +584,60 @@
                         </a>
                     </div>
                     <br>
-                        <div class="property-info-wrapper">
-                            <div class="property-info">
-                                <h2>{{ $properti->judul }}</h2>
-                                <p class="property"><strong>Telepon:</strong> {{ $properti->notelp }}</p>
-                                <p class="property"><strong>Lokasi:</strong> {{ $properti->alamat }}</p>
-                                <p class="property"><strong>Harga:</strong><span class="price-box">Rp.{{ number_format($properti->harga, 0, ',', '.') }}</span></p>
-                                <div class="property-meta">
-                                    <p><strong>Luas Bangunan:</strong> {{ $properti->lb }} m²</p>
-                                    <p><strong>Luas Tanah:</strong> {{ $properti->lt }} m²</p>
-                                    <p><strong>Kamar Tidur:</strong> {{ $properti->kt }}</p>
-                                    <p><strong>Kamar Mandi:</strong> {{ $properti->km }}</p>
-                                    <p><strong>Garasi:</strong> {{ $properti->garasi }}</p>
-                                    <p><strong>Sertifikat:</strong> {{ $properti->sertifikat->kode }}</p>
-                                </div>
+                    <div class="property-info-wrapper">
+                        <div class="property-info">
+                            <h2>{{ $properti->judul }}</h2>
+                            @if (session('otp_verified'))
+                                <!-- Display phone number only if OTP is verified -->
+                                
+                                <p class="property"><strong>Telepon:</strong><a href="https://wa.me/{{ $properti->notelp }}">{{ $properti->notelp }}</a></p>
+                            @else
+                                <!-- Display the contact link only if OTP is not verified -->
+                                <p class="property"><strong>Telepon:</strong>
+                                    <a href="#" class="property" id="toggle-contact-form">Lihat Kontak</a>
+                                </p>
+                            @endif
+                            <div id="contact-form" style="display: none;"> <!-- Form disembunyikan secara default -->
+                                <form id="otp-form" method="POST">
+                                    @csrf
+                                    <label for="phone">Masukkan Nomor Telepon Anda:</label>
+                                    <input type="text" id="phone" name="phone" placeholder="6281xxxxxx"
+                                        required>
+                                    <button type="submit" class="btn bt-primary">Kirim OTP</button>
+                                </form>
                             </div>
 
-                            <div class="property-description">
-                                <h2>Deskripsi Properti</h2>
-                                <p>{!! $properti->deskripsi !!}</p>
+                            <div id="otp-confirmation-form" style="display: none;">
+                                <!-- Form konfirmasi OTP disembunyikan secara default -->
+                                <form action="{{ route('verify.otp') }}" method="POST">
+                                    @csrf
+                                    <label for="phone-confirmation">Masukkan Nomor Telepon:</label>
+                                    <input type="text" id="phone-confirmation" name="phone" required readonly>
+
+                                    <label for="otp">Masukkan OTP:</label>
+                                    <input type="text" id="otp" name="otp" required>
+
+                                    <button type="submit">Verifikasi OTP</button>
+                                </form>
                             </div>
+                            <br>
+                            <p class="property"><strong>Lokasi:</strong> {{ $properti->alamat }}</p>
+                            <p class="property"><strong>Harga:</strong><span
+                                    class="price-box">Rp.{{ number_format($properti->harga, 0, ',', '.') }}</span></p>
+                            <div class="property-meta">
+                                <p><strong>Luas Bangunan:</strong> {{ $properti->lb }} m²</p>
+                                <p><strong>Luas Tanah:</strong> {{ $properti->lt }} m²</p>
+                                <p><strong>Kamar Tidur:</strong> {{ $properti->kt }}</p>
+                                <p><strong>Kamar Mandi:</strong> {{ $properti->km }}</p>
+                                <p><strong>Garasi:</strong> {{ $properti->garasi }}</p>
+                                <p><strong>Sertifikat:</strong> {{ $properti->sertifikat->kode }}</p>
+                            </div>
+                        </div>
+
+                        <div class="property-description">
+                            <h2>Deskripsi Properti</h2>
+                            <p>{!! $properti->deskripsi !!}</p>
+                        </div>
                     </div>
                 </div>
                 </div>
@@ -496,6 +668,50 @@
     </a>
 
     <script src="{{ asset('frontend/assets/js/script.js') }}" defer></script>
+    <script>
+        document.getElementById('toggle-contact-form').addEventListener('click', function(event) {
+            event.preventDefault(); // Mencegah aksi default dari link
+            var form = document.getElementById('contact-form');
+            form.style.display = form.style.display === "none" || form.style.display === "" ? "block" : "none";
+        });
+
+        document.getElementById('otp-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Mencegah pengiriman form default
+
+            var phone = document.getElementById('phone').value;
+
+            // Mengirim data menggunakan AJAX
+            fetch('{{ route('send.otp') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        phone: phone
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Tampilkan form konfirmasi OTP
+                        document.getElementById('contact-form').style.display =
+                            'none'; // Sembunyikan form pengiriman OTP
+                        document.getElementById('otp-confirmation-form').style.display =
+                            'block'; // Tampilkan form konfirmasi OTP
+                        document.getElementById('phone-confirmation').value = data
+                            .phone; // Masukkan nomor telepon ke form konfirmasi
+                        alert(data.message); // Tampilkan pesan keberhasilan
+                    } else {
+                        alert('Gagal mengirim OTP: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan, silakan coba lagi.');
+                });
+        });
+    </script>
     <script>
         // Mendapatkan tahun saat ini
         const currentYear = new Date().getFullYear();
