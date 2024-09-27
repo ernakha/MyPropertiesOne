@@ -176,7 +176,7 @@
                     </li>
 
                     <li class="navbar-item">
-                        <a href="/#kota" class="navbar-link" data-nav-toggler>Kota</a>
+                        <a href="#kota" class="navbar-link" data-nav-toggler>Kota</a>
                     </li>
 
                     <li class="navbar-item">
