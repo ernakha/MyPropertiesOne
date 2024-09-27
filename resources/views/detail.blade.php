@@ -41,11 +41,20 @@
 
 </head>
 
-<body id="top">
+<body id="top" style="font-family: 'Urbanist', sans-serif;">
     <style>
         .bootstrap-only .carousel-item img {
             max-height: 500px;
             object-fit: cover;
+        }
+
+        /* Styling untuk header agar tetap di atas saat di-scroll */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
         }
 
         .logo {
@@ -98,14 +107,12 @@
         h1 {
             font-size: 30px;
             font-weight: bold;
-            margin-bottom: 10px;
         }
 
         /* Styling untuk lokasi properti */
         .property-location {
             font-size: 18px;
             color: #7f8c8d;
-            margin-bottom: 40px;
         }
 
         /* Styling untuk wrapper detail properti */
@@ -142,6 +149,12 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #34495e;
         }
 
         .property-description h2 {
@@ -200,7 +213,7 @@
         }
 
         /* Responsiveness */
-        @media (max-width: 768px) {
+        @media (width: 768px) {
             .property-info-wrapper {
                 flex-direction: column;
             }
@@ -214,66 +227,50 @@
         .carousel-image {
             width: 100%;
             height: auto;
-            max-height: 500px;
+            max-height: 100px;
             /* Anda bisa menyesuaikan max-height agar gambar tidak terlalu besar */
             object-fit: cover;
             /* Menjaga proporsi gambar tanpa distorsi */
         }
 
+        .carousel-item img {
+            width: 100%;
+            max-height: 500px;
+            /* Tentukan tinggi maksimal box */
+            object-fit: contain;
+            /* Gambar tetap proporsional tanpa distorsi */
+            background-color: #f0f0f0;
+            /* Warna latar belakang untuk gambar yang lebih kecil */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            /* Efek bayangan */
+        }
+
+        /* Carousel control button */
         .carousel-control-prev,
         .carousel-control-next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
             width: 50px;
             height: 50px;
-            z-index: 10;
-            cursor: pointer;
-            background-color: rgba(0, 0, 0, 0.5);
-            /* Tambahkan transparansi agar tidak menghalangi gambar */
-            border-radius: 50%;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            top: 50%;
+            /* Pastikan tombol kontrol berada di tengah secara vertikal */
+            transform: translateY(-50%);
         }
 
         .carousel-control-prev {
-            left: 20px;
+            left: 15px;
         }
 
         .carousel-control-next {
-            right: 20px;
-        }
-
-        .btn {
-            background-color: #ffff;
-            /* Warna latar belakang */
-            color: blue;
-            /* Warna teks */
-            padding: 5px 5px 5px 5px;
-            /* Spasi dalam tombol */
-            border: none;
-            /* Hilangkan border default */
-            border-radius: 5px;
-            /* Sudut yang membulat */
-            cursor: pointer;
-            /* Ganti kursor menjadi pointer */
-            transition: background-color 0.3s;
-            /* Transisi untuk efek hover */
-            position: left;
-
-            position: absolute;
-            top: 120px;
-            /* Geser tombol ke atas dari judul */
-            left: 50px;
-            /* Atur posisi tombol ke kiri */
-        }
-
-        .btn:hover {
-            background-color: #1a5276;
-            /* Warna saat hover */
+            right: 15px;
         }
 
         .section {
             position: relative;
-            padding-top: 200px;
             /* Beri ruang untuk tombol */
         }
 
@@ -281,6 +278,44 @@
             position: relative;
             z-index: 1;
             /* Pastikan judul tetap di atas layer tombol */
+        }
+
+        .price-box {
+            background-color: #ffdd57;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .price-box {
+            display: inline-block;
+            background-color: #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-left: 10px;
+            margin-top: 0px;
+        }
+
+        .price-label {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .property-meta {
+            margin-top: 20px;
+        }
+
+        .property-meta p {
+            margin: 5px 0;
         }
 
         #zoomContainer {
@@ -386,17 +421,17 @@
                         <div class="carousel-inner">
                             @php $gambarArray = json_decode($properti->gambar); @endphp
                             @if ($gambarArray && count($gambarArray) > 0)
-                                @foreach ($gambarArray as $index => $image)
-                                    <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                                        <img src="{{ asset('storage/' . $image) }}"
-                                            class="d-block w-100 carousel-image" alt="{{ $properti->judul }}">
-                                    </div>
-                                @endforeach
+                            @foreach ($gambarArray as $index => $image)
+                            <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                <img src="{{ asset('storage/' . $image) }}"
+                                    class="d-block w-100 carousel-image" alt="{{ $properti->judul }}">
+                            </div>
+                            @endforeach
                             @else
-                                <div class="carousel-item active">
-                                    <img src="path_to_placeholder_image.jpg" class="d-block w-100 carousel-image"
-                                        alt="No Image Available">
-                                </div>
+                            <div class="carousel-item active">
+                                <img src="path_to_placeholder_image.jpg" class="d-block w-100 carousel-image"
+                                    alt="No Image Available">
+                            </div>
                             @endif
                         </div>
 
@@ -411,16 +446,12 @@
                         </a>
                     </div>
                     <br>
-                    <div class="">
                         <div class="property-info-wrapper">
                             <div class="property-info">
-                                <br>
                                 <h2>{{ $properti->judul }}</h2>
-                                <br>
                                 <p class="property"><strong>Telepon:</strong> {{ $properti->notelp }}</p>
                                 <p class="property"><strong>Lokasi:</strong> {{ $properti->alamat }}</p>
-                                <p class="property"><strong>Harga:</strong>
-                                    Rp.{{ number_format($properti->harga, 0, ',', '.') }}</p>
+                                <p class="property"><strong>Harga:</strong><span class="price-box">Rp.{{ number_format($properti->harga, 0, ',', '.') }}</span></p>
                                 <div class="property-meta">
                                     <p><strong>Luas Bangunan:</strong> {{ $properti->lb }} m²</p>
                                     <p><strong>Luas Tanah:</strong> {{ $properti->lt }} m²</p>
@@ -435,8 +466,8 @@
                                 <h2>Deskripsi Properti</h2>
                                 <p>{!! $properti->deskripsi !!}</p>
                             </div>
-                        </div>
                     </div>
+                </div>
                 </div>
             </section>
         </article>
@@ -482,7 +513,7 @@
             carouselImages.forEach(function(image) {
                 image.addEventListener('click', function() {
                     zoomImage.src = this
-                    .src; // Set the zoom image source to the clicked image source
+                        .src; // Set the zoom image source to the clicked image source
                     zoomContainer.style.display = 'flex'; // Show the zoom container
                 });
             });
