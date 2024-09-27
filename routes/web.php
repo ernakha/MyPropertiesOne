@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\KotaController;
 use App\Http\Controllers\Backend\SertifikatController;
+use App\Http\Controllers\OtpController;
 use App\Http\Controllers\PropertiController;
 use App\Models\Kota;
 use App\Models\Properti;
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+// Landing
 Route::get('/', function () {
     // Ambil semua data properti dari database
     $properti = Properti::paginate(18);
@@ -27,6 +28,7 @@ Route::get('/', function () {
     return view('welcome', compact('properti', 'kota'));
 })->name('land');
 
+// Properti
 Route::get('/cari-properti', function () {
     // Ambil semua data properti dari database
     $properti = Properti::paginate(18);
@@ -34,12 +36,20 @@ Route::get('/cari-properti', function () {
     return view('properti', compact('properti', 'kota'));
 })->name('cari');
 
+// Detail
 Route::get('/detail/{slug}', function ($slug) {
     $properti = Properti::where('slug', $slug)->firstOrFail();
     $kota = Kota::all();
     $sertifikat = Sertifikat::all();
     return view('detail', compact('properti', 'kota', 'sertifikat'));
 })->name('detail');
+
+// Otp
+Route::post('/send-otp', [OtpController::class, 'sendOtp'])->name('send.otp');
+Route::get('/verify', function(){
+    return view('verify-otp');
+});
+Route::post('/verify-otp', [OtpController::class, 'verifyOtp'])->name('verify.otp');
 
 Auth::routes();
 Route::get('/register', function () {
