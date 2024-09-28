@@ -541,9 +541,9 @@
     <main>
         <article>
             @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
             @endif
             <section class="section course" id="properti" aria-label="course"
                 style="background-image: url('{{ asset('frontend/assets/images/course-bg.jpg') }}')">
@@ -559,17 +559,17 @@
                         <div class="carousel-inner">
                             @php $gambarArray = json_decode($properti->gambar); @endphp
                             @if ($gambarArray && count($gambarArray) > 0)
-                                @foreach ($gambarArray as $index => $image)
-                                    <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                                        <img src="{{ asset('storage/' . $image) }}"
-                                            class="d-block w-100 carousel-image" alt="{{ $properti->judul }}">
-                                    </div>
-                                @endforeach
+                            @foreach ($gambarArray as $index => $image)
+                            <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                <img src="{{ asset('storage/' . $image) }}"
+                                    class="d-block w-100 carousel-image" alt="{{ $properti->judul }}">
+                            </div>
+                            @endforeach
                             @else
-                                <div class="carousel-item active">
-                                    <img src="path_to_placeholder_image.jpg" class="d-block w-100 carousel-image"
-                                        alt="No Image Available">
-                                </div>
+                            <div class="carousel-item active">
+                                <img src="path_to_placeholder_image.jpg" class="d-block w-100 carousel-image"
+                                    alt="No Image Available">
+                            </div>
                             @endif
                         </div>
 
@@ -588,14 +588,14 @@
                         <div class="property-info">
                             <h2>{{ $properti->judul }}</h2>
                             @if (session('otp_verified'))
-                                <!-- Display phone number only if OTP is verified -->
-                                
-                                <p class="property"><strong>Telepon:</strong><a href="https://wa.me/{{ $properti->notelp }}">{{ $properti->notelp }}</a></p>
+                            <!-- Display phone number only if OTP is verified -->
+
+                            <p class="property"><strong>Telepon:</strong><a href="https://wa.me/{{ $properti->notelp }}">{{ $properti->notelp }}</a></p>
                             @else
-                                <!-- Display the contact link only if OTP is not verified -->
-                                <p class="property"><strong>Telepon:</strong>
-                                    <a href="#" class="property" id="toggle-contact-form">Lihat Kontak</a>
-                                </p>
+                            <!-- Display the contact link only if OTP is not verified -->
+                            <p class="property"><strong>Telepon:</strong>
+                                <a href="#" class="property" id="toggle-contact-form">Lihat Kontak</a>
+                            </p>
                             @endif
                             <div id="contact-form" style="display: none;"> <!-- Form disembunyikan secara default -->
                                 <form id="otp-form" method="POST">
@@ -625,12 +625,24 @@
                             <p class="property"><strong>Harga:</strong><span
                                     class="price-box">Rp.{{ number_format($properti->harga, 0, ',', '.') }}</span></p>
                             <div class="property-meta">
+                                @if($properti->lb)
                                 <p><strong>Luas Bangunan:</strong> {{ $properti->lb }} m²</p>
+                                @endif
+                                @if($properti->lt)
                                 <p><strong>Luas Tanah:</strong> {{ $properti->lt }} m²</p>
+                                @endif
+                                @if($properti->kt)
                                 <p><strong>Kamar Tidur:</strong> {{ $properti->kt }}</p>
+                                @endif
+                                @if($properti->km)
                                 <p><strong>Kamar Mandi:</strong> {{ $properti->km }}</p>
+                                @endif
+                                @if($properti->garasi)
                                 <p><strong>Garasi:</strong> {{ $properti->garasi }}</p>
+                                @endif
+                                @if($properti->sertifikat && $properti->sertifikat->kode)
                                 <p><strong>Sertifikat:</strong> {{ $properti->sertifikat->kode }}</p>
+                                @endif
                             </div>
                         </div>
 
@@ -656,8 +668,7 @@
         <div class="container">
             <div class="footer-bottom">
                 <p class="copyright">
-                    Copyright <span id="currentYear" style="display: inline;""></span> MyPropertiesOne. Ada
-                    pertanyaan? <a href=" #" class="copyright-link">Hubungi Kami</a>
+                    Copyright <span id="currentYear" style="display: inline;"></span> MyPropertiesOne. Ada pertanyaan? <a href="https://wa.me/6283876767059" class="copyright-link" target="_blank">Hubungi Kami di WhatsApp</a>atau <a href="https://www.instagram.com/mypropertiesone/" class="copyright-link" target="_blank"> Instagram</a>
                 </p>
             </div>
         </div>
@@ -681,7 +692,7 @@
             var phone = document.getElementById('phone').value;
 
             // Mengirim data menggunakan AJAX
-            fetch('{{ route('send.otp') }}', {
+            fetch('{{ route("send.otp") }}', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

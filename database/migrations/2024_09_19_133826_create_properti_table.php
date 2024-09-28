@@ -21,11 +21,11 @@ return new class extends Migration
             $table->string('harga');
             $table->unsignedBigInteger('sertifikat_id'); 
             $table->foreign('sertifikat_id')->references('id')->on('sertifikat')->onDelete('cascade');
-            $table->string('lb');
+            $table->string('lb')->nullable();
             $table->string('lt');
-            $table->string('kt');
-            $table->string('km');
-            $table->string('garasi');
+            $table->string('kt')->nullable();
+            $table->string('km')->nullable();
+            $table->string('garasi')->nullable();
             $table->text('deskripsi');
             $table->text('gambar');
             $table->string('slug');
