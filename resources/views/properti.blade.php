@@ -334,48 +334,63 @@
                             <a href="{{ route('detail', ['slug' => $item->slug]) }}" class="card-link">
                                 <div class="course-card">
                                     <figure class="card-banner">
-                                        <!-- Menampilkan gambar pertama dan memastikan ukurannya sesuai dengan card -->
                                         <img src="{{ asset('storage/' . $gambarArray[0]) }}"
                                             class="img-fluid dynamic-img card-image" alt="Gambar Properti"
                                             loading="lazy">
                                     </figure>
 
-                                    <div class="card-actions">
-                                        <span class="badge">{{ $item->kota->nama }}</span>
-                                    </div>
-
-                                    <div class="card-content">
-                                        <ul class="card-meta-list">
-                                            <li class="card-meta-item">
-                                                <ion-icon name="bed-outline"></ion-icon>
-                                                <span class="card-meta-text">{{ $item->kt }} Kamar Tidur</span>
-                                            </li>
-                                            <li class="card-meta-item">
-                                                <ion-icon name="water-outline"></ion-icon>
-                                                <time class="card-meta-text">{{ $item->km }} Kamar Mandi</time>
-                                            </li>
-                                        </ul>
-
-                                        <h3 class="h3">
-                                            {{ Str::limit($item->judul, 20) }} {{ $item->kota->nama }}
-                                        </h3>
-
-                                        <div class="rating-wrapper">
-                                            <span class="rating-text">{{ $item->alamat }}</span>
-                                        </div>
-
-                                        <div class="card-footer">
-                                            <div class="card-price">
+                                    <div class="card-content" style="display: flex; flex-direction: column;">
+                                        <!-- Bagian harga dan luas tanah (lt) dipindah ke atas -->
+                                        <div class="card-meta-list" style="margin-bottom: 10px;"> <!-- Adjust spacing here -->
+                                            @if($item->harga)
+                                            <div class="card-price" style="font-size: 1.5rem; font-weight: bold; margin-bottom: 5px; margin-right: 150px;">
                                                 <span class="span">Rp.{{ number_format($item->harga, 0, ',', '.') }}</span>
                                             </div>
-                                            <div class="card-meta-item">
-                                                <ion-icon name="expand-outline"></ion-icon>
+                                            @endif
+                                            @if($item->lt)
+                                            <div class="card-meta-item" style="display: flex; align-items: center;">
+                                                <ion-icon name="expand-outline" style="margin-right: 5px;"></ion-icon>
                                                 <span class="card-meta-text">{{ $item->lt }} m²</span>
                                             </div>
+                                            @endif
                                         </div>
+
+                                        <h3 class="h3" style="margin-bottom: 5px;"> <!-- Adjust spacing here -->
+                                            {{ Str::limit($item->judul, 20) }}
+                                            @if($item->kota && $item->kota->nama)
+                                            {{ $item->kota->nama }}
+                                            @endif
+                                        </h3>
+
+                                        @if($item->alamat)
+                                        <div class="rating-wrapper" style="margin-bottom: 15px;"> <!-- Adjust spacing here -->
+                                            <span class="rating-text">{{ $item->alamat }}</span>
+                                        </div>
+                                        @endif
+
+                                        <!-- Pindahkan kt dan km ke bagian bawah -->
+                                        <ul class="card-footer" style="margin-top: auto;"> <!-- Make this section grow to fill space -->
+                                            <li class="card-meta-item">
+                                                @if($item->kt)
+                                                <ion-icon name="bed-outline" style="margin-right: 5px;"></ion-icon>
+                                                <span class="card-meta-text">{{ $item->kt }} Kamar Tidur</span>
+                                                @endif
+                                            </li>
+                                            <li class="card-meta-item">
+                                                @if($item->km)
+                                                <ion-icon name="water-outline" style="margin-right: 5px;"></ion-icon>
+                                                <span class="card-meta-text">{{ $item->km }} Kamar Mandi</span>
+                                                @endif
+                                            </li>
+                                        </ul>
                                     </div>
+
                                 </div>
-                            </a> <!-- Tutup tag <a> -->
+                            </a>
+                        </li>
+                        @else
+                        <li>
+                            <div class="empty-space" style="height: 1000px;"></div> <!-- Menjaga ruang kosong -->
                         </li>
                         @endif
                         @endforeach
@@ -393,8 +408,7 @@
         <div class="container">
             <div class="footer-bottom">
                 <p class="copyright">
-                    Copyright <span id="currentYear" style="display: inline;""></span> MyPropertiesOne. Ada
-                    pertanyaan? <a href=" #" class="copyright-link">Hubungi Kami</a>
+                    Copyright <span id="currentYear" style="display: inline;"></span> MyPropertiesOne. Ada pertanyaan? <a href="https://wa.me/6283876767059" class="copyright-link" target="_blank">Hubungi Kami di WhatsApp</a>atau <a href="https://www.instagram.com/mypropertiesone/" class="copyright-link" target="_blank"> Instagram</a>
                 </p>
             </div>
         </div>
