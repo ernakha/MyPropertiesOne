@@ -338,6 +338,9 @@
                                             class="img-fluid dynamic-img card-image" alt="Gambar Properti"
                                             loading="lazy">
                                     </figure>
+                                    <div class="card-actions">
+                                        <span class="badge">{{ $item->kota->nama }}</span>
+                                      </div>
 
                                     <div class="card-content" style="display: flex; flex-direction: column;">
                                         <!-- Bagian harga dan luas tanah (lt) dipindah ke atas -->
@@ -347,19 +350,10 @@
                                                 <span class="span">Rp.{{ number_format($item->harga, 0, ',', '.') }}</span>
                                             </div>
                                             @endif
-                                            @if($item->lt)
-                                            <div class="card-meta-item" style="display: flex; align-items: center;">
-                                                <ion-icon name="expand-outline" style="margin-right: 5px;"></ion-icon>
-                                                <span class="card-meta-text">{{ $item->lt }} m²</span>
-                                            </div>
-                                            @endif
                                         </div>
 
                                         <h3 class="h3" style="margin-bottom: 5px;"> <!-- Adjust spacing here -->
                                             {{ Str::limit($item->judul, 20) }}
-                                            @if($item->kota && $item->kota->nama)
-                                            {{ $item->kota->nama }}
-                                            @endif
                                         </h3>
 
                                         @if($item->alamat)
@@ -372,14 +366,20 @@
                                         <ul class="card-footer" style="margin-top: auto;"> <!-- Make this section grow to fill space -->
                                             <li class="card-meta-item">
                                                 @if($item->kt)
-                                                <ion-icon name="bed-outline" style="margin-right: 5px;"></ion-icon>
-                                                <span class="card-meta-text">{{ $item->kt }} Kamar Tidur</span>
+                                                <ion-icon name="bed-outline"></ion-icon>
+                                                <span class="card-meta-text" style="font-size: smaller">{{ $item->kt }} Kamar Tidur</span>
                                                 @endif
                                             </li>
                                             <li class="card-meta-item">
                                                 @if($item->km)
-                                                <ion-icon name="water-outline" style="margin-right: 5px;"></ion-icon>
-                                                <span class="card-meta-text">{{ $item->km }} Kamar Mandi</span>
+                                                <ion-icon name="water-outline"></ion-icon>
+                                                <span class="card-meta-text" style="font-size: smaller">{{ $item->km }} Kamar Mandi</span>
+                                                @endif
+                                            </li>
+                                            <li class="card-meta-item">
+                                                @if($item->lt)
+                                                <ion-icon name="expand-outline"></ion-icon>
+                                                <span class="card-meta-text" style="font-size: smaller">{{ $item->lt }} m <sup>2</sup></span>
                                                 @endif
                                             </li>
                                         </ul>
@@ -408,7 +408,7 @@
         <div class="container">
             <div class="footer-bottom">
                 <p class="copyright">
-                    Copyright <span id="currentYear" style="display: inline;"></span> MyPropertiesOne. Ada pertanyaan? <a href="https://wa.me/6283876767059" class="copyright-link" target="_blank">Hubungi Kami di WhatsApp</a>atau <a href="https://www.instagram.com/mypropertiesone/" class="copyright-link" target="_blank"> Instagram</a>
+                    Copyright <span id="currentYear" style="display: inline;"></span> MyPropertiesOne. Ada pertanyaan? Hubungi Kami di <a href="https://wa.me/6283876767059" class="copyright-link" target="_blank">WhatsApp</a> atau <a href="https://www.instagram.com/mypropertiesone/" class="copyright-link" target="_blank"> Instagram</a>
                 </p>
             </div>
         </div>
