@@ -668,7 +668,7 @@
         <div class="container">
             <div class="footer-bottom">
                 <p class="copyright">
-                    Copyright <span id="currentYear" style="display: inline;"></span> MyPropertiesOne. Ada pertanyaan? <a href="https://wa.me/6283876767059" class="copyright-link" target="_blank">Hubungi Kami di WhatsApp</a>atau <a href="https://www.instagram.com/mypropertiesone/" class="copyright-link" target="_blank"> Instagram</a>
+                    Copyright <span id="currentYear" style="display: inline;"></span> MyPropertiesOne. Ada pertanyaan? Hubungi Kami di <a href="https://wa.me/6283876767059" class="copyright-link" target="_blank">WhatsApp</a> atau <a href="https://www.instagram.com/mypropertiesone/" class="copyright-link" target="_blank"> Instagram</a>
                 </p>
             </div>
         </div>
